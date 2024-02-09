@@ -1,0 +1,32 @@
+-1-
+CREATE PROCEDURE VisualizzaContravvenzioniPerAnno
+    @Anno INT
+AS
+BEGIN
+    SELECT V.IDVerbale, V.IDViolazione, V.IDAnagrafica, V.DataViolazione, V.IndirizzoViolazione, V.Importo, V.DecurtamentoPunti
+    FROM Verbale V
+    WHERE YEAR(V.DataViolazione) = @Anno;
+END;
+
+
+-2-
+CREATE PROCEDURE VisualizzaTotalePuntiDecurtatiPerData
+    @Data DATETIME
+AS
+BEGIN
+    SELECT SUM(DecurtamentoPunti) AS TotalePuntiDecurtati
+    FROM Verbale
+    WHERE CONVERT(DATE, DataViolazione) = CONVERT(DATE, @Data);
+END;
+
+-3-
+CREATE PROCEDURE EliminaVerbale
+    @IDVerbale NVARCHAR(20)
+AS
+BEGIN
+    DELETE FROM Verbale
+    WHERE IDVerbale = @IDVerbale;
+END;
+
+
+

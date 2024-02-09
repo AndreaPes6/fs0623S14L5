@@ -1,0 +1,65 @@
+-1-
+SELECT COUNT(*) AS NumeroVerbaliTrascritti
+FROM Verbale;
+
+-2-
+SELECT IDAnagrafica, COUNT(*) AS NumeroVerbaliTrascritti
+FROM Verbale
+GROUP BY IDAnagrafica;
+
+-3-
+SELECT IDViolazione, COUNT(*) AS NumeroVerbaliTrascritti
+FROM Verbale
+GROUP BY IDViolazione;
+
+-4-
+SELECT IDAnagrafica, SUM(DecurtamentoPunti) AS TotalePuntiDecurtati
+FROM Verbale
+GROUP BY IDAnagrafica;
+
+-5-
+SELECT A.Cognome, A.Nome, V.DataViolazione, V.IndirizzoViolazione, V.Importo, V.DecurtamentoPunti
+FROM Verbale V
+JOIN Anagrafica A ON V.IDAnagrafica = A.IDAnagrafica
+WHERE V.DataViolazione BETWEEN '2009-01-02 00:00:00.000' AND '2009-31-07 00:00:00.000';
+
+-6-
+SELECT IDAnagrafica, SUM(Importo) AS TotaleImporti
+FROM Verbale
+GROUP BY IDAnagrafica;
+
+-7-
+SELECT IDAnagrafica, SUM(Importo) AS TotaleImporti
+FROM Verbale
+GROUP BY IDAnagrafica;
+
+-8-
+SELECT *
+FROM Anagrafica
+WHERE Città = 'Palermo';
+
+-9-
+DECLARE @DataViolazione DATE = '2024-02-01'; 
+
+SELECT DataViolazione, Importo, DecurtamentoPunti
+FROM Verbale
+WHERE DataViolazione = @DataViolazione;
+
+-10-
+SELECT Nominativo_Agente, COUNT(*) AS NumeroViolazioniContestate
+FROM Verbale
+WHERE Contestazione = 1
+GROUP BY Nominativo_Agente;
+
+-11-
+SELECT A.Cognome, A.Nome, A.Indirizzo, V.DataViolazione, V.Importo, V.DecurtamentoPunti
+FROM Verbale V
+JOIN Anagrafica A ON V.IDAnagrafica = A.IDAnagrafica
+WHERE V.DecurtamentoPunti > 5;
+
+-12-
+SELECT A.Cognome, A.Nome, A.Indirizzo, V.DataViolazione, V.Importo, V.DecurtamentoPunti
+FROM Verbale V
+JOIN Anagrafica A ON V.IDAnagrafica = A.IDAnagrafica
+WHERE V.Importo > 400;
+
